@@ -1,41 +1,26 @@
-import { useLayoutEffect } from "react";
-import { Route, Routes, useNavigate, useLocation } from "react-router-dom";
-import { useUserContext } from "./Contexts/UserContext";
-import { Mainlayout } from "./Pages/Layouts/MainLayout";
-import { Login } from "./Pages/Login";
+import { memo } from 'react'
+import { Route, Routes, useLocation } from 'react-router-dom'
+import { useUserContext } from './Contexts/UserContext'
+import { Mainlayout } from './Pages/Layouts/MainLayout'
+import { Login } from './Pages/Login'
+import { Task } from './Pages/Task'
 
 function App() {
-  const { username } = useUserContext();
-  const navigate = useNavigate();
-  const location = useLocation();
+  const { username } = useUserContext()
 
-  useLayoutEffect(() => {
-    
-    function checkUser() {
-      if (!username) {
-        navigate("/login");
-      } else {
-        navigate("/");
-      }
-    }
-    setTimeout(() => {
-      checkUser();
-    }, 2000)
-
-    return () => {
-      checkUser();
-    };
-
-  }, [username, location.pathname]);
+  if (!username) {
+    return <Login />
+  }
 
   return (
     <div className="min-h-screen">
       <Routes>
-        <Route index element={<Mainlayout />} />
-        <Route path="/login" element={<Login />} />
+        <Route path="/" element={<Mainlayout />}>
+          <Route index element={<Task />} />
+        </Route>
       </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default memo(App)

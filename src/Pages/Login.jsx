@@ -1,18 +1,18 @@
-import { useRef } from "react";
-import { useUserContext } from "../Contexts/UserContext";
+import { useRef } from 'react'
+import { useUserContext } from '../Contexts/UserContext'
 
 export const Login = () => {
-  const username = useRef();
-  const { setUserName } = useUserContext();
+  const username = useRef()
+  const { setName } = useUserContext()
 
   const submitHandler = (event) => {
-    event.preventDefault();
-    let name = username.current.value;
+    event.preventDefault()
+    let name = username.current.value
 
-    if (!name.trim()) return;
-    setUserName(name);
-    username.current.value = "";
-  };
+    if (!name.trim()) return
+    setName(name)
+    username.current.value = ''
+  }
 
   return (
     <div className="flex justify-center">
@@ -33,5 +33,5 @@ export const Login = () => {
         <button className="btn btn-primary">Start</button>
       </form>
     </div>
-  );
-};
+  )
+}

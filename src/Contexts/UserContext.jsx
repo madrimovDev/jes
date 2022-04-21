@@ -1,18 +1,17 @@
-import { createContext, useContext, useState } from "react";
+import { createContext, memo, useCallback, useContext, useState } from 'react'
 
-const UserContext = createContext();
-UserContext.displayName = "UserContext";
+const UserContext = createContext()
+// UserContext.displayName = 'UserContext'
 
-export const useUserContext = () => useContext(UserContext);
+export const useUserContext = () => useContext(UserContext)
 
 function UserContextProvider({ children }) {
-  const [username, setUserName] = useState("");
-  console.log(username);
+  const [username, setUserName] = useState('')
   return (
-    <UserContext.Provider value={{setUserName, username }}>
+    <UserContext.Provider value={{ setName: setUserName, username }}>
       {children}
     </UserContext.Provider>
-  );
+  )
 }
 
-export default UserContextProvider;
+export default memo(UserContextProvider, (prev, next) => true)
