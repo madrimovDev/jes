@@ -1,4 +1,4 @@
-import { useUserContext } from "./UserContext";
+import { useUserContext } from "../Contexts/UserContext";
 
 export const Navbar = () => {
   const { username } = useUserContext();
